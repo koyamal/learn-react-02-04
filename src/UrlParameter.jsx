@@ -8,10 +8,8 @@ export const UrlParameter = () => {
 
   const history = useHistory();
 
-  const onClickReload = () => {
-    const now = new Date();
-    const nowSecond = now.getSeconds() % 10;
-    history.push(`/page2/${nowSecond}`);
+  const onClickReload = (search) => {
+    history.push(`/page2/middle${search}`);
   };
   return (
     <div>
@@ -31,7 +29,13 @@ export const UrlParameter = () => {
       })}
       <p>Parameter is {id}</p>
       <p>Query Parameter is {query.get("name") || "null"}</p>
-      <button onClick={onClickReload}>Reload!!</button>
+      <button
+        onClick={() => {
+          onClickReload(search);
+        }}
+      >
+        Reload!!
+      </button>
     </div>
   );
 };
