@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const Page2 = () => {
   const now = new Date();
-  const nowSecond = now.getSeconds();
+  const nowSecond = now.getSeconds() % 10;
   console.log(nowSecond);
   return (
     <div>
