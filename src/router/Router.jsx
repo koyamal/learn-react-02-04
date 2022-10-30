@@ -4,6 +4,7 @@ import { Page1 } from "../Page1";
 import { Page1DetailA } from "../Page1DetailA";
 import { Page1DetailB } from "../Page1DetailB";
 import { Page2 } from "../Page2";
+import { page1Routes } from "./Page1Routes";
 
 export const Router = () => {
   return (
@@ -17,15 +18,18 @@ export const Router = () => {
           const { url } = props.match;
           return (
             <Switch>
-              <Route exact path={url}>
-                <Page1 />
-              </Route>
-              <Route path={`${url}/detailA`}>
-                <Page1DetailA />
-              </Route>
-              <Route path={`${url}/detailB`}>
-                <Page1DetailB />
-              </Route>
+              {page1Routes.map((page1Route) => {
+                return (
+                  <Route
+                    key={page1Route.path}
+                    path={`${url}${page1Route.path}`}
+                    exact={page1Route.exact}
+                    render={() => {
+                      return page1Route.children;
+                    }}
+                  />
+                );
+              })}
             </Switch>
           );
         }}
