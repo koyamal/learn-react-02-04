@@ -1,10 +1,18 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import { page2Data } from "./data/Page2Data";
 
 export const UrlParameter = () => {
   const { id } = useParams();
   const { search } = useLocation();
   const query = new URLSearchParams(search);
+
+  const history = useHistory();
+
+  const onClickReload = () => {
+    const now = new Date();
+    const nowSecond = now.getSeconds() % 10;
+    history.push(`/page2/${nowSecond}`);
+  };
   return (
     <div>
       <h1>Url Parameter Page</h1>
@@ -23,6 +31,7 @@ export const UrlParameter = () => {
       })}
       <p>Parameter is {id}</p>
       <p>Query Parameter is {query.get("name") || "null"}</p>
+      <button onClick={onClickReload}>Reload!!</button>
     </div>
   );
 };
