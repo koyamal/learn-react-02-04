@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { page2Data } from "./data/Page2Data";
 
 export const UrlParameter = () => {
   const { id } = useParams();
+  const { search } = useLocation();
+  const query = new URLSearchParams(search);
   return (
     <div>
       <h1>Url Parameter Page</h1>
@@ -20,6 +22,7 @@ export const UrlParameter = () => {
         return null;
       })}
       <p>Parameter is {id}</p>
+      <p>Query Parameter is {query.get("name") || "null"}</p>
     </div>
   );
 };
